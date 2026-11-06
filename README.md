@@ -125,3 +125,14 @@ Como las plantillas solo pueden usar componentes, harán falta componentes extra
 3. Poner las fotos reales (`taller-1.jpg`, `taller-2.jpg`, `taller-3.jpg`).
 4. Revisar a mano la validación de clase: focus visible, error con texto, el cambio del botón se propaga, la separación muestra un nombre de variable.
 5. Compartir el archivo como «cualquiera con el enlace puede verlo» y entregar el enlace en ClickEdu.
+
+## PROMPTS ACT05
+
+1. Crea las variables de color, tipografía, espacio y radio.
+2. Crea tres reglas de uso con ejemplos correctos e incorrectos.
+3. Crea un botón principal y secundario con cuatro estados.
+5. Crea un bloque con la lista de próximos talleres.
+6. Actualiza la paleta de colores manteniendo las variables existentes.
+7. Unifica el radio de los componentes usando una única variable.
+8. Adapta todos los componentes a la nueva identidad visual.
+9. Crea un bloque de suscripción con campo de correo y botón.
