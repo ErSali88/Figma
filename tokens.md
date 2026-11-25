@@ -77,27 +77,20 @@ Font: documentació oficial de Tailwind, pàgina *Theme variables* (tailwindcss.
 | gruix-vora (1 px) | `--gruix-vora` | cap (Tailwind no té namespace per a gruixos) | `border` (1 px) |
 | gruix-focus (2 px) | `--gruix-focus` | cap | `outline-2` (2 px) |
 
-## Preguntes
+## Preguntas
 
-### Què fa `--color-*: initial` i per què és útil per aplicar una guia d'estil?
+### ¿Que hace --color-*: initial y por que es util para aplicar una guia de estilo?
 
-`--color-*: initial;` esborra tots els tokens de l'espai de noms `--color-*` que Tailwind porta de sèrie (`red-500`, `blue-600`, `slate-100`…). Després només existeixen els colors que declaro jo a `@theme`.
+borra todos los colores que tailwind trae por defecto (red-500, blue-600, slate-100...) y solo quedan los que declaro en @theme
+asi la guia es la unica fuente de colores: una clase como bg-red-500 no genera css, y cambiar un token cambia toda la pagina
 
-És útil perquè **converteix la guia en l'única font de colors**: si escric una classe com `bg-red-500`, Tailwind no la reconeix i no genera cap CSS, de manera que és impossible usar sense voler un color que no és de la guia. També evita que la web s'assembli a totes les altres fetes amb Tailwind, i fa que canviar un token (per exemple `--color-accent-fosc`) canviï tota la pàgina.
+### ¿Como funciona --spacing y por que encaja con los nombres de los espacios de la guia?
 
-### Com funciona `--spacing`, i per què encaixa amb els noms dels espais de la guia?
+--spacing es la unidad base de 4 px (0.25rem) y las clases p-*, m-*, gap-* calculan numero x --spacing, asi que p-4 son 16 px
+encaja porque espai-N ya es ese multiplicador: espai-4 es p-4 y espai-12 es p-12, sin declarar cada espacio por separado
 
-`--spacing` és la **unitat base** de l'escala d'espais: `--spacing: 0.25rem` (4 px). Les utilitats d'espaiat (`p-*`, `m-*`, `gap-*`, `w-*`, `mt-*`…) calculen el valor com `número × --spacing`, així que `p-4` són 4 × 4 px = 16 px.
+### ¿Como se ha hecho el velo de la presentacion y por que garantiza el contraste del titular?
 
-Encaixa amb la guia perquè els noms dels espais ja són aquest multiplicador: `espai-4` és 4 unitats (16 px), `espai-12` són 12 unitats (48 px). Per això `espai-N` es tradueix directament a la classe amb el número N (`px-4`, `gap-6`, `py-12`) sense haver de declarar cada espai un per un. Els números que no existeixen a la guia (5, 7, 9…) els evito a la maquetació.
-
-### Com he fet el vel de la presentació, i per què garanteix el contrast del titular?
-
-He creat el token `--color-vel: rgb(38 35 31 / 0.65)`, que és el color `nit` al 65 % d'opacitat. Amb `@utility bg-hero` el combino amb la fotografia en un sol fons: un `linear-gradient(var(--color-vel), var(--color-vel))` col·locat **per sobre** de `url("imatges/hero.jpg")`. Així no calen elements extra a l'HTML i la secció només porta la classe `bg-hero`.
-
-El vel enfosqueix la foto de manera uniforme i prou perquè el text clar hi llegeixi bé. He calculat el cas pitjor, un píxel de la foto de blanc pur, que sota el vel queda com `#726F6D`. Sobre aquest fons:
-
-- `blanc` (titular, retol i paràgraf de la presentació) arriba a **4,94:1**.
-- Sobre qualsevol altre píxel més fosc, que és la gran majoria de la foto, el contrast és encara més alt (per exemple 6,56:1 sobre un llum taronja).
-
-Per això el titular, el retol i l'entradeta de la presentació van en `text-blanc`, i no en `text-text-invers` (4,2:1 al cas pitjor) ni `accent-clar` (3,9:1), que al cas extrem no arribarien a 4,5:1.
+el token --color-vel es nit al 65 % (rgb(38 35 31 / 0.65)) y @utility bg-hero lo pone como degradado encima de imatges/hero.jpg
+en el peor caso, un pixel blanco de la foto, el fondo queda en #726F6D y el blanco del titular da 4,94:1, por encima del minimo de 4,5:1
+por eso el texto del hero va en text-blanc: text-invers (4,2:1) y accent-clar (3,9:1) no llegarian en ese caso
